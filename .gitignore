@@ -1,0 +1,15 @@
+.idea/
+*.iml
+target/
+*.swp
+*~
+.DS_Store
+.phutil_module_cache
+build.properties
+asterix/local
+obelix/server/local
+obelix/solr/overlays
+commons-thrift/gen-py/
+driven-plugin*.jar
+*.hprof
+.venv/

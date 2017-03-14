@@ -1,0 +1,20 @@
+# Docker-Compose for Soundwave 
+version: '2'
+services:
+  soundwave-worker:
+    build: ./worker
+    environment:
+      - CONFIG_FILE=config/soundwaveworker.properties
+      - TEST_CONFIG=1
+
+  soundwave-store:
+    image: elasticsearch:1.7.6
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+  soundwave-zk:
+    image: zookeeper:3.3.6
+    ports:
+      - "2181:2181"
+
