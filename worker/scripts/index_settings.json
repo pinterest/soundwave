@@ -1,0 +1,51 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1,
+    "analyzer": {
+      "default": {
+        "type": "standard"
+      }
+    },
+    "tokenizer": {
+      "default": {
+        "type": "standard"
+      }
+    }
+  },
+  "mappings": {
+    "_default_": {
+      "dynamic_templates": [
+        {
+          "template_catch": {
+            "match": "*",
+            "mapping": {
+              "index": "not_analyzed"
+            }
+          }
+        }
+      ]
+    },
+    "instance": {
+      "dynamic_templates": [
+        {
+          "template_time": {
+            "match": "*_time",
+            "mapping": {
+              "type": "date",
+              "format": "dateOptionalTime"
+            }
+          }
+        },
+        {
+          "template_address": {
+            "match": "*_address",
+            "mapping": {
+              "type": "ip"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

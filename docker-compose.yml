@@ -6,6 +6,8 @@ services:
     environment:
       - CONFIG_FILE=config/soundwaveworker.properties
       - TEST_CONFIG=1
+      - AWS_ACCESS_KEY_ID=<<AWS_ACCESS_KEY_ID>>
+      - AWS_SECRET_ACCESS_KEY=<<AWS_SECRET_ACCESS_KEY>>
 
   soundwave-store:
     image: elasticsearch:1.7.6

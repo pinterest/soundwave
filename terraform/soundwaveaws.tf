@@ -1,8 +1,8 @@
 provider "aws" {
   access_key = "<<Your Access Key>>"
   secret_key = "<<Your Secret Key>>"
-  region     = "<<Your AWS Region"
-  }
+  region     = "<<Your AWS Region>>"
+} 
 
 # Setup the IAM Role for AWS lambda function
 resource "aws_iam_role" "lambda_soundwave_role" {
