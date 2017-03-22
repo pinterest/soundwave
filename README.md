@@ -33,7 +33,7 @@ has been put into a [Terraform](https://www.terraform.io/) file terraform/soundw
 provider "aws" {
   access_key = "<<Your Access Key>>"
   secret_key = "<<Your Secret Key>>"
-  region     = "<<Your AWS Region"
+  region     = "<<Your AWS Region>>"
 } 
 ```
 3. Download [Terraform](https://www.terraform.io/downloads.html) and go to terraform directory. Run
