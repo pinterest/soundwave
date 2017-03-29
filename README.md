@@ -41,9 +41,11 @@ provider "aws" {
 terraform apply
 ```
 4. Build the project, go to soundwave root directory and run:
-* First, input your region on worker/config/soundwaveworker.properties if it is not us-east-1
+* First, input your region and update_queue(sqs) on worker/config/soundwaveworker.properties if it is not us-east-1
 ```
 aws_region=us-east-1
+update_queue=https://sqs.us-east-1.amazonaws.com/<accountnumber>/soundwave-events
+
 ```
 * Build the package
 ```
