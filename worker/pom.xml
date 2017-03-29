@@ -164,34 +164,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.12.1</version>
-                <executions>
-                    <execution>
-                        <id>verify-style</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.puppycrawl.tools</groupId>
-                        <artifactId>checkstyle</artifactId>
-                        <version>6.11.2</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <configLocation>../pinterest_v2_checks.xml
-                    </configLocation>
-                    <logViolationsToConsole>true</logViolationsToConsole>
-                    <suppressionsLocation>${basedir}/checkstyle-suppressions.xml
-                    </suppressionsLocation>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 </project>
