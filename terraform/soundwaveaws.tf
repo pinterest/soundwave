@@ -46,7 +46,7 @@ resource "aws_iam_role_policy" "lambda_soundwave_policy" {
         "SQS:GetQueueAttributes",
         "SQS:GetQueueUrl"
       ],
-      "Resource": "arn:aws:sqs:us-east-1:093574427811:soundwave-events"
+      "Resource": "${aws_sqs_queue.soundwave-events.arn}"
     }
   ]
 }
@@ -61,7 +61,13 @@ resource "aws_lambda_function" "sound_wave_notification" {
     handler = "soundwave_lambda.lambda_handler"
     runtime = "python2.7"
 }
-# Setup CloudEvent
+
+resource "aws_lambda_permission" "allow_cloudwatch" {
+  statement_id   = "AllowExecutionFromCloudWatch"
+  action         = "lambda:InvokeFunction"
+  function_name  = "${aws_lambda_function.sound_wave_notification.function_name}"
+  principal      = "events.amazonaws.com"
+}
 
 
 
