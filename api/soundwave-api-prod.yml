@@ -1,0 +1,34 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: 80
+      useForwardedHeaders: true
+  adminConnectors:
+    - type: http
+      port: 8081
+
+  requestLog:
+    timeZone: UTC
+    appenders:
+      - type: file
+        currentLogFilename: /var/log/soundwave-api/access.log
+        threshold: ALL
+        archive: true
+        archivedLogFilenamePattern: /var/log/soundwave-api/access.%d.log.gz
+        archivedFileCount: 10
+
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+  appenders:
+    - type: file
+      currentLogFilename: /var/log/soundwave-api/soundwave-api-info.log
+      threshold: ALL
+      archive: true
+      archivedLogFilenamePattern: /var/log/soundwave-api/soundwave-api-info.%d.log
+      archivedFileCount: 10
+      timeZone: UTC
+
+  loggers:
+    com.pinterest.soundwave.ApiApplication: DEBUG

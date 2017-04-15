@@ -10,6 +10,7 @@
     <modules>
         <module>commons</module>
         <module>worker</module>
+        <module>api</module>
   </modules>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

@@ -4,13 +4,16 @@
 
 ulimit -n 65536
 
+export SERVICENAME=soundwave-api
+export JAVA_MAIN=com.pinterest.soundwave.ApiApplication
+export CMD_LINE_ARG=server
+export APP_CONFIG_FILE=soundwave-api-prod.yml
 
-export SERVICENAME=soundwave-worker
-export JAVA_MAIN=WorkerMain
 LOG4J_CONFIG_FILE=${LOG4J_CONFIG_FILE:=config/log4j.properties}
-CONFIG_FILE=${CONFIG_FILE:=config/soundwaveworker.properties}
+CONFIG_FILE=${CONFIG_FILE:=config/soundwaveapi.properties}
 HEAP_SIZE= ${HEAP_SIZE:=512m}
 NEW_SIZE= ${NEW_SIZE:=256m}
+
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 export PARENT_DIR="$(dirname $DIR)"
@@ -18,7 +21,7 @@ export PARENT_DIR="$(dirname $DIR)"
 LOG_DIR=/var/log/soundwave-worker
 CP=${PARENT_DIR}:${PARENT_DIR}/*:${PARENT_DIR}/lib/*
 
-java -server -Xmx${HEAP_SIZE} -Xms${HEAP_SIZE} -XX:NewSize=${NEW_SIZE} -XX:MaxNewSize=${NEW_SIZE} \
+exec java -server -Xmx${HEAP_SIZE} -Xms${HEAP_SIZE} -XX:NewSize=${NEW_SIZE} -XX:MaxNewSize=${NEW_SIZE} \
 -verbosegc -Xloggc:${LOG_DIR}/gc.log \
 -XX:+UnlockDiagnosticVMOptions -XX:ParGCCardsPerStrideChunk=4096 \
 -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=100 -XX:GCLogFileSize=2M \
@@ -31,4 +34,4 @@ java -server -Xmx${HEAP_SIZE} -Xms${HEAP_SIZE} -XX:NewSize=${NEW_SIZE} -XX:MaxNe
 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.ssl=false \
 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.port=10102 \
 -Dfile.encoding=UTF-8 \
-${JAVA_MAIN}
+${JAVA_MAIN} ${CMD_LINE_ARG} ${APP_CONFIG_FILE}
