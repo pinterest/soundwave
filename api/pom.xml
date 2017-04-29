@@ -4,20 +4,37 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>soundwave</artifactId>
-        <groupId>com.pinterest.optimus</groupId>
+        <groupId>com.pinterest.soundwave</groupId>
         <version>0.1-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
-
+    <groupId>com.pinterest.soundwave</groupId>
     <artifactId>soundwave-api</artifactId>
-
+    <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <name>soundwave-api</name>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <dropwizard.version>0.9.1</dropwizard.version>
+        <mainClass>com.pinterest.soundwave.ApiApplication</mainClass>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.dropwizard</groupId>
+                <artifactId>dropwizard-bom</artifactId>
+                <version>${dropwizard.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -30,6 +47,34 @@
                     <artifactId>slf4j-jdk14</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.pinterest.soundwave</groupId>
+            <artifactId>soundwave-commons</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>io.dropwizard</groupId>
+            <artifactId>dropwizard-core</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.dropwizard</groupId>
+            <artifactId>dropwizard-testing</artifactId>
+            <version>0.9.3</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -181,7 +226,7 @@
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <configLocation>../../codestyle/pinterest_v2_checks.xml
+                    <configLocation>../pinterest_v2_checks.xml
                     </configLocation>
                     <logViolationsToConsole>true</logViolationsToConsole>
                     <suppressionsLocation>${basedir}/checkstyle-suppressions.xml

@@ -1,0 +1,12 @@
+{
+  "facts": {
+    "test": "test-facts"
+  },
+  "pkgs": {
+    "test": "test-pkgs"
+  },
+  "unknown": {
+    "test": "unknown"
+  },
+  "unknown2": "unknown"
+}
