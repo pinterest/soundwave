@@ -20,17 +20,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.pinterest.optimus.commons</groupId>
-            <artifactId>pinterest-commons</artifactId>
-            <version>0.1-SNAPSHOT</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-jdk14</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
