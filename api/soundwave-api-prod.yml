@@ -3,11 +3,13 @@ server:
     - type: http
       port: 80
       useForwardedHeaders: true
+
   adminConnectors:
     - type: http
       port: 8081
 
   requestLog:
+    type: classic
     timeZone: UTC
     appenders:
       - type: file
@@ -18,7 +20,6 @@ server:
         archivedFileCount: 10
 
 logging:
-
   # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
   level: INFO
   appenders:
@@ -29,6 +30,5 @@ logging:
       archivedLogFilenamePattern: /var/log/soundwave-api/soundwave-api-info.%d.log
       archivedFileCount: 10
       timeZone: UTC
-
   loggers:
     com.pinterest.soundwave.ApiApplication: DEBUG

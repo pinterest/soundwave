@@ -9,6 +9,13 @@ services:
       - AWS_ACCESS_KEY_ID=<<AWS_ACCESS_KEY_ID>>
       - AWS_SECRET_ACCESS_KEY=<<AWS_SECRET_ACCESS_KEY>>
 
+  soundwave-api:
+    build: ./api
+    environment:
+      - CONFIG_FILE=config/soundwaveapi.properties
+    ports:
+      - "8080:80"
+
   soundwave-store:
     image: elasticsearch:1.7.6
     ports:
