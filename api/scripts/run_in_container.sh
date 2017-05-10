@@ -11,8 +11,8 @@ export APP_CONFIG_FILE=soundwave-api-prod.yml
 
 LOG4J_CONFIG_FILE=${LOG4J_CONFIG_FILE:=config/log4j.properties}
 CONFIG_FILE=${CONFIG_FILE:=config/soundwaveapi.properties}
-HEAP_SIZE= ${HEAP_SIZE:=512m}
-NEW_SIZE= ${NEW_SIZE:=256m}
+HEAP_SIZE=${HEAP_SIZE:=512m}
+NEW_SIZE=${NEW_SIZE:=256m}
 
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
