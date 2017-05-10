@@ -1,0 +1,48 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+div.navbar {
+    border-radius: 0px;
+}
+
+div.results-table {
+    margin: 10px 40px;
+}
+
+div.query-box {
+    margin: 10px 40px;
+}
+
+input.query-input {
+
+    float: left;
+}
+
+i.fa-database {
+    color: #5f9ea0;
+}
+
+button.query-btn {
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+label.query-checkbox {
+    margin-top: 20px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+button.copy-btn {
+    margin-left: 40px;
+}
+
+.error-message {
+    text-align: center;
+}

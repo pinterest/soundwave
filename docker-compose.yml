@@ -27,3 +27,7 @@ services:
     ports:
       - "2181:2181"
 
+  soundwave-ui:
+    build: ./ui
+    ports:
+      - "80:80"
