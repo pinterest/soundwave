@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Soundwave Instance</title>
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/buttons.bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jsoneditor.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/jquery.jsoneditor.js') }}"></script>
+
+</head>
+<body>
+<div class="row">
+    {% include 'navbar.html' %}
+</div>
+<br>
+<div class="row">
+    <div class="col-xs-8 col-xs-offset-1">
+        <h3> Instance Properties {{ id }} </h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-8 json-container col-xs-offset-1">
+
+        <div id="legend">
+            <button type="button" id="expander" class="btn btn-default">Expand All</button>
+        </div>
+
+        <div id="json-data" class="json-editor"></div>
+
+        <div id="footer" style="font-size:10px;padding-left:5%;">
+            FlexiJSONEditor - Copyright © 2011-2013 David Durman (client IO, <a
+                href="http://client.io">http://client.io</a>,
+            org@client.io)
+        </div>
+    </div>
+</div>
+<script>
+    {# Render data in json format #}
+    $('#json-data').jsonEditor({{ data | safe }});
+
+    {# Toggle the button text and expand / collapse json #}
+    $('#expander').click(function () {
+        var editor = $('#json-data');
+        editor.toggleClass('expanded');
+        $(this).text(editor.hasClass('expanded') ? 'Collapse' : 'Expand all');
+    });
+</script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 .idea/
 *.iml
 target/
+*.pyc
 *.swp
 *~
 .DS_Store

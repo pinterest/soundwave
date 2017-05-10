@@ -1,0 +1,36 @@
+<!-- Common query box html -->
+<div class="col-md-12 query-box">
+    <div class="query" name="query-box">
+        <form class="form-inline" method="POST" action="/">
+            <div class="col-md-4">
+                <label for="query">Query: ( <a target='_blank' href="https://w.pinadmin.com/display/OPS/CMDB#CMDB-QueryExamplesandStructureLayout">Examples</a> )</label> &nbsp;
+                <input type="text" class="col-xs-12 query-input" id="query" name="query" value='{{ query }}' placeholder="service_mapping:dbs" required>
+            </div>
+
+            <div class="col-md-4">
+                <label for="fields">Fields:</label>
+                <input type="text" class="col-xs-12 query-input" id="fields" name="fields" value='{{ fields }}' required>
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-success query-btn"> Submit</button>
+            </div>
+
+            <div class="col-md-2">
+                <label class="checkbox-inline query-checkbox">
+                    <input type="checkbox" class="query-checkbox" name="onlyrunning" value="true" checked="checked">
+                    Only Running instances
+                </label>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="col-md-1">
+        <button type="button" id="copy-button" class="btn btn-primary copy-btn" data-clipboard-action="copy" data-clipboard-text="{{ url_str }}"> Copy Query Url</button>
+    </div>
+</div>
+<script>
+(function(){
+    new Clipboard('#copy-button');
+})();
+</script>

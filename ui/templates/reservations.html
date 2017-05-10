@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Soundwave reservations</title>
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dataTables.bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/buttons.bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/buttons.html5.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/buttons.bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
+</head>
+<body>
+
+<div class="row">
+    {% include 'navbar.html' %}
+</div>
+<div class="row">
+    <div class="col-md-12 date-box">
+        <form class="form-inline" method="POST" action="/reservations">
+            <div class="col-md-2">
+                <label for="date">Date:</label>
+                <input type="date" class="col-xs-12 query-input" id="date" name="date">
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-success query-btn"> Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+<hr>
+<div class="row">
+    <br>
+    <div class="results-table">
+        <table id="data-table" class="table table-responsive">
+            <thead>
+            <tr> {% for table_header in table_headers %}
+                <th data-field="{{ table_header }}">{{ table_header }}</th> {% endfor %} </tr>
+            </thead>
+        </table>
+    </div>
+    <script>
+        var $table = $('#data-table');
+        $(function () {
+            $table.dataTable({
+                paging: false,
+                data: {{ table_data | safe }},
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'csvHtml5',
+                ]
+            });
+        });
+    </script>
+</div>
+</body>
+</html>
