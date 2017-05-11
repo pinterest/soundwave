@@ -1,5 +1,6 @@
 # Soundwave
 
+![Soundwave UI](https://github.com/pinterest/soundwave/blob/master/demo.png)
 
 # What is soundwave
 Soundwave helps to create a searchable store with UI that keeps all current and historic EC2 instances data with extending schema. It contains three parts:
@@ -12,7 +13,7 @@ In Pinterest, Soundwave is the core of our CMDB (Configuration Management Databa
 
 # Why use soundwave 
 
-Soundwave is useful to EC2 users because:
+Soundwave is useful to EC2 users as it helps to resolve the following issues:
 1. AWS managedment API has a rate limit which makes it not suitable to directly query machine information from applications. 
 2. AWS has no information for terminated instances.  
 3. In AWS, EC2 schema can only be extended in limited way with tags.
@@ -47,9 +48,10 @@ aws_region=us-east-1
 update_queue=https://sqs.us-east-1.amazonaws.com/<accountnumber>/soundwave-events
 
 ```
+(Note: Account Number is available on the AWS console under MyAccount section)
 * Build the package
 ```
-mvn package
+mvn clean package
 ```
 6. Open docker-compose.yml, put AWS key id and secret there:
 
@@ -72,14 +74,16 @@ docker-compose up
 8. Create ES indexes:
 
 ```
-worker/scripts/provision_index.sh http://localhost:9200/soundwave_prod
-worker/scripts/provision_index.sh http://localhost:9200/soundwave_ss
+cd worker/scripts
+./provision_index.sh http://localhost:9200/soundwave_prod
+./provision_index.sh http://localhost:9200/soundwave_ss
 ```
 
-Try to launch an EC2 instance, you can check the instance created
-in the index.
-
-curl http://localhost:9200/soundwave_prod/_search
+9. Launch an EC2 instance through the AWS console or aws-cli command line.
+10. You can browse the instance and its metadata using one of the following methods:
+* UI - http://localhost:80   (query -> state:running)
+* API - http://localhost:8080/v2/instance/<instance_id> 
+* Elasticsearch - http://localhost:9200/soundwave_prod/_search
 
 ```
 {
