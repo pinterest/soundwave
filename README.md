@@ -72,8 +72,9 @@ docker-compose up
 8. Create ES indexes:
 
 ```
-worker/scripts/provision_index.sh http://localhost:9200/soundwave_prod
-worker/scripts/provision_index.sh http://localhost:9200/soundwave_ss
+cd worker/scripts/provision_index.sh
+./provision_index.sh http://localhost:9200/soundwave_prod
+./provision_index.sh http://localhost:9200/soundwave_ss
 ```
 
 Try to launch an EC2 instance, you can check the instance created
