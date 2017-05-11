@@ -6,7 +6,7 @@ ulimit -n 65536
 
 
 export SERVICENAME=soundwave-worker
-export JAVA_MAIN=WorkerMain
+export JAVA_MAIN=com.pinterest.soundwave.WorkerMain
 LOG4J_CONFIG_FILE=${LOG4J_CONFIG_FILE:=config/log4j.properties}
 CONFIG_FILE=${CONFIG_FILE:=config/soundwaveworker.properties}
 HEAP_SIZE=${HEAP_SIZE:=512m}

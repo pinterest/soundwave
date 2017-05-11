@@ -18,7 +18,6 @@ package com.pinterest.soundwave.api;
 
 import com.pinterest.soundwave.annotations.StringDate;
 import com.pinterest.soundwave.aws.AwsStatus;
-import com.pinterest.soundwave.bean.EsInstanceConfig;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -28,17 +27,6 @@ import java.util.Map;
 
 public class EsInstanceAdapter {
 
-  @JsonProperty("service_mapping")
-  private String[] serviceMappings;
-
-  @JsonProperty("svc_tag")
-  private String[] serviceTag;
-
-  @JsonProperty("sys_tag")
-  private String[] sysTag;
-
-  @JsonProperty("usage_tag")
-  private String[] usageTag;
 
   @JsonProperty("id")
   private String id;
@@ -49,14 +37,8 @@ public class EsInstanceAdapter {
   @JsonProperty("location")
   private String location;
 
-  @JsonProperty("nodepool")
-  private String nodePool;
-
   @JsonProperty("state")
   private String state;
-
-  @JsonProperty("deployment")
-  private String deployment;
 
   @JsonProperty("created_time")
   @StringDate
@@ -75,9 +57,6 @@ public class EsInstanceAdapter {
 
   @JsonProperty("subnet_id")
   private String subnetId;
-
-  @JsonProperty("config")
-  private EsInstanceConfig config;
 
   @JsonProperty("aws_launch_time")
   @StringDate
@@ -98,23 +77,11 @@ public class EsInstanceAdapter {
   @JsonProperty("aws_status")
   private AwsStatus awsStatus;
 
-  @JsonProperty("facts")
-  private Map<String, Object> facts;
-
-  @JsonProperty("pkgs")
-  private Map<String, Object> pkgs;
-
   @JsonProperty("token")
   private String token;
 
   @JsonProperty("cached")
   private int cached;
-
-  @JsonProperty("defunct_count")
-  private int defunctCount;
-
-  @JsonProperty("pc")
-  private int pc;
 
   public EsInstanceAdapter() {}
 
@@ -150,14 +117,6 @@ public class EsInstanceAdapter {
     this.id = id;
   }
 
-  public EsInstanceConfig getConfig() {
-    return config;
-  }
-
-  public void setConfig(EsInstanceConfig config) {
-    this.config = config;
-  }
-
   public String getRegion() {
     return region;
   }
@@ -172,22 +131,6 @@ public class EsInstanceAdapter {
 
   public void setLocation(String location) {
     this.location = location;
-  }
-
-  public String getNodePool() {
-    return nodePool;
-  }
-
-  public void setNodePool(String nodePool) {
-    this.nodePool = nodePool;
-  }
-
-  public String getDeployment() {
-    return deployment;
-  }
-
-  public void setDeployment(String deployment) {
-    this.deployment = deployment;
   }
 
   public String getVpcId() {
@@ -206,38 +149,6 @@ public class EsInstanceAdapter {
     this.subnetId = subnetId;
   }
 
-  public String[] getServiceMappings() {
-    return serviceMappings;
-  }
-
-  public void setServiceMappings(String[] serviceMappings) {
-    this.serviceMappings = serviceMappings;
-  }
-
-  public String[] getServiceTag() {
-    return serviceTag;
-  }
-
-  public void setServiceTag(String[] serviceTag) {
-    this.serviceTag = serviceTag;
-  }
-
-  public String[] getSysTag() {
-    return sysTag;
-  }
-
-  public void setSysTag(String[] sysTag) {
-    this.sysTag = sysTag;
-  }
-
-  public String[] getUsageTag() {
-    return usageTag;
-  }
-
-  public void setUsageTag(String[] usageTag) {
-    this.usageTag = usageTag;
-  }
-
   public Map<String, Object> getCloud() {
     return cloud;
   }
@@ -252,22 +163,6 @@ public class EsInstanceAdapter {
 
   public void setAwsStatus(AwsStatus awsStatus) {
     this.awsStatus = awsStatus;
-  }
-
-  public Map<String, Object> getFacts() {
-    return facts;
-  }
-
-  public void setFacts(Map<String, Object> facts) {
-    this.facts = facts;
-  }
-
-  public Map<String, Object> getPkgs() {
-    return pkgs;
-  }
-
-  public void setPkgs(Map<String, Object> pkgs) {
-    this.pkgs = pkgs;
   }
 
   public String getState() {
@@ -324,21 +219,5 @@ public class EsInstanceAdapter {
 
   public void setCached(int cached) {
     this.cached = cached;
-  }
-
-  public int getDefunctCount() {
-    return defunctCount;
-  }
-
-  public void setDefunctCount(int defunctCount) {
-    this.defunctCount = defunctCount;
-  }
-
-  public int getPc() {
-    return pc;
-  }
-
-  public void setPc(int pc) {
-    this.pc = pc;
   }
 }

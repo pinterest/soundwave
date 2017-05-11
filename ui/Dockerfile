@@ -1,4 +1,4 @@
-FROM python:3-onbuild
+FROM python:2-onbuild
 
 # Create log directory
 RUN mkdir -p /var/log/soundwave_ui

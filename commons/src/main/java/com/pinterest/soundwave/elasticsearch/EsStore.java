@@ -55,7 +55,7 @@ public abstract class EsStore {
   public EsStore(String host, int port) {
     String clusterName = Configuration.getProperties().getString("es_cluster_name", "soundwave");
     Settings settings = ImmutableSettings.settingsBuilder().put("cluster.name", clusterName)
-        .put("client.transport.sniff", true).build();
+        .put("client.transport.sniff", false).build();
     esClient = new TransportClient(settings)
         .addTransportAddress(
             new InetSocketTransportAddress(host, port));
