@@ -72,7 +72,7 @@ docker-compose up
 8. Create ES indexes:
 
 ```
-cd worker/scripts/provision_index.sh
+cd worker/scripts
 ./provision_index.sh http://localhost:9200/soundwave_prod
 ./provision_index.sh http://localhost:9200/soundwave_ss
 ```
