@@ -78,7 +78,7 @@ cd worker/scripts
 ./provision_index.sh http://localhost:9200/soundwave_ss
 ```
 
-Try to launch an EC2 instance, you can check the instance created
+Try to launch an EC2 instance, you can browse http://localhost or check the instance created
 in the index.
 
 curl http://localhost:9200/soundwave_prod/_search
