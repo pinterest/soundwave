@@ -1,5 +1,6 @@
 # Soundwave
 
+![alt text] https://github.com/pinterest/soundwave/blob/master/demo.png
 
 # What is soundwave
 Soundwave helps to create a searchable store with UI that keeps all current and historic EC2 instances data with extending schema. It contains three parts:
