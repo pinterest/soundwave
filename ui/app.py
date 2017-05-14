@@ -76,7 +76,7 @@ def index():
             "index.html",
             url_str="",
             query="",
-            fields="id,state,config.name,config.internal_address",
+            fields="id,state,aws_launch_time,vpc_id,subnet_id",
             table_headers=[],
             table_data=[[]])
 
