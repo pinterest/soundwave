@@ -13,7 +13,7 @@ In Pinterest, Soundwave is the core of our CMDB (Configuration Management Databa
 
 # Why use soundwave 
 
-Soundwave is useful to EC2 users because:
+Soundwave is useful to EC2 users as it helps to resolve the following issues:
 1. AWS managedment API has a rate limit which makes it not suitable to directly query machine information from applications. 
 2. AWS has no information for terminated instances.  
 3. In AWS, EC2 schema can only be extended in limited way with tags.
