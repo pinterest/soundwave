@@ -81,7 +81,7 @@ cd worker/scripts
 
 9. Launch an EC2 instance through the AWS console or aws-cli command line.
 10. You can browse the instance and its metadata using one of the following methods:
-* UI - http://localhost:80
+* UI - http://localhost:80   (query -> state:running)
 * API - http://localhost:8080/v2/instance/<instance_id> 
 * Elasticsearch - http://localhost:9200/soundwave_prod/_search
 
