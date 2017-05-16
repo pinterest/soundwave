@@ -79,10 +79,11 @@ cd worker/scripts
 ./provision_index.sh http://localhost:9200/soundwave_ss
 ```
 
-Try to launch an EC2 instance, you can browse http://localhost or check the instance created
-in the index.
-
-curl http://localhost:9200/soundwave_prod/_search
+9. Launch an EC2 instance through the AWS console or aws-cli command line.
+10. You can browse the instance and its metadata using one of the following methods:
+*UI - http://localhost:80
+*API - http://localhost:8080/v2/instance/<instance_id> 
+*Elasticsearch - http://localhost:9200/soundwave_prod/_search
 
 ```
 {
