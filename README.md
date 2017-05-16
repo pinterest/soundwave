@@ -48,9 +48,10 @@ aws_region=us-east-1
 update_queue=https://sqs.us-east-1.amazonaws.com/<accountnumber>/soundwave-events
 
 ```
+(Note: Account Number is available on the AWS console under MyAccount section)
 * Build the package
 ```
-mvn package
+mvn clean package
 ```
 6. Open docker-compose.yml, put AWS key id and secret there:
 
