@@ -3,60 +3,85 @@
 ![Soundwave UI](https://github.com/pinterest/soundwave/blob/master/demo.png)
 
 # What is soundwave
-Soundwave helps to create a searchable store with UI that keeps all current and historic EC2 instances data with extending schema. It contains three parts:
-1. A worker system to sync with EC2 data and push to the local store.
-2. An API layer to provide REST APIs to access local search.
-3. A dashboard for end users to do ad hoc search
+Soundwave is a searchable EC2 inventory store. It tracks all the current and historic EC2 instances with their metadata.
+It has three parts:
 
-In Pinterest, Soundwave is the core of our CMDB (Configuration Management Database) that serves as the source of truth for our EC2 instances information used by service management and finance purpose.
+* A java based worker system to synchronize EC2 data and push to the elastic search store.
+* A RESTful API layer to provide access to instance data and search.
+* A UI dashboard for end users to perform ad hoc search.
+
+At Pinterest, Soundwave is the foundation of our Configuration Management Database which serves as the source of truth for our EC2 instance information.
+The data is used for service management, visibility, and finance purposes.
 
 
-# Why use soundwave 
+# Why use soundwave
 
-Soundwave is useful to EC2 users as it helps to resolve the following issues:
-1. AWS management API has a rate limit which makes it be not suitable for directly querying machine information from applications. 
-2. AWS has no information for terminated instances.  
-3. In AWS, EC2 schema can only be extended in limited way with tags.
-4. The EC2 API is also very limited in support query beyond simple filtering
+Soundwave is useful for companies which operate EC2 at scale and require to track usage and instance meta data.
+It helps address the following issues:
+1. AWS EC2 API has rate limit, which make it unsuitable to directly query for machine information. 
+2. AWS does not persist metadata and instance information for terminated instances.  
+3. In AWS, EC2 schema can only be extended in a limited way with the use of tags.
 
 # Getting Started
-1. Clone the repositry
+
+####1. Clone the repository
 
 ```
 git clone https://github.com/pinterest/soundwave.git
 ```
 
-2. Setup AWS Prerequisites:
+####2. Setup AWS Credentials
 
-Soundwave requires some configuration on AWS to receive EC2 instance notifications. All of the required configurations
-has been put into a [Terraform](https://www.terraform.io/) file terraform/soundwaveaws.tf. To provison required configrations in AWS, open terraform/soundwaveaws.tf. Input your AWS credential and AWS region into the beginning section of the file:
 
+Soundwave uses [Terraform](https://www.terraform.io/) to provision the required infrastructure for running the service.
+
+[Terraform](https://www.terraform.io/) requires AWS credentials (Access and Secret Key) of a privileged user. 
 ```
+$ vi soundwave/terraform/soundwaveaws.tf
+
+----------------------------------------
 provider "aws" {
   access_key = "<<Your Access Key>>"
   secret_key = "<<Your Secret Key>>"
   region     = "<<Your AWS Region>>"
 } 
 ```
-3. Download [Terraform](https://www.terraform.io/downloads.html) and go to terraform directory. Run
-```
-terraform apply
-```
-4. Build the project, go to soundwave root directory and run:
-* First, input your region and update_queue(sqs) on worker/config/soundwaveworker.properties if it is not us-east-1
-```
-aws_region=us-east-1
-update_queue=https://sqs.us-east-1.amazonaws.com/<accountnumber>/soundwave-events
+####3. Run Terraform
+
 
 ```
+$ cd soundwave/terraform
+$ terraform apply
+```
+
+####4. Update Properties
+
+
+Use the AWS region and your account number in the fields shown below
+
 (Note: Account Number is available on the AWS console under MyAccount section)
-* Build the package
+```
+$ vi soundwave/worker/config/soundwaveworker.properties
+-------------------------------------------------------
+
+aws_region=us-east-1
+update_queue=https://sqs.us-east-1.amazonaws.com/<accountnumber>/soundwave-events
+```
+
+####5. Build the project
+
+
 ```
 mvn clean package
 ```
-6. Open docker-compose.yml, put AWS key id and secret there:
 
+####6. Update docker-compose
+
+
+Update the docker-compose.yml file to use your AWS Access and Secret keys
 ```
+$ vi soundwave/docker-compose.yml
+---------------------------------
 version: '2'
 services:
   soundwave-worker:
@@ -67,24 +92,32 @@ services:
       - AWS_ACCESS_KEY_ID=<<key_id>>
       - AWS_SECRET_ACCESS_KEY=<<access_key>>
 ```
-7. Run demo with the following command:
+
+####7. Run docker-compose
+
 
 ```
 docker-compose up
 ```
-8. Create ES indexes:
+
+####8. Create Elastic search indexes
+
 
 ```
-cd worker/scripts
-./provision_index.sh http://localhost:9200/soundwave_prod
-./provision_index.sh http://localhost:9200/soundwave_ss
+$ cd worker/scripts
+$ ./provision_index.sh http://localhost:9200/soundwave_prod
+$ ./provision_index.sh http://localhost:9200/soundwave_ss
 ```
 
-9. Launch an EC2 instance through the AWS console or aws-cli command line.
-10. You can browse the instance and its metadata using one of the following methods:
-* UI - http://localhost:80   (query -> state:running)
-* API - http://localhost:8080/v2/instance/<instance_id> 
-* Elasticsearch - http://localhost:9200/soundwave_prod/_search
+####9. Launch an EC2 instance through the AWS console or aws-cli command line
+
+####10. See the results
+
+Results can be seen on one of the following:
+
+#####UI [http://localhost:80](http://localhost:80)
+#####API [http://localhost:8080/v2/instance/<instance_id>](http://localhost:8080/v2/instance/<instance_id>) 
+#####Elasticsearch [http://localhost:9200/soundwave_prod/_search](http://localhost:9200/soundwave_prod/_search)
 
 ```
 {
@@ -241,7 +274,8 @@ cd worker/scripts
 # License
 [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 
-# Contacts
+
+
 
 
 
