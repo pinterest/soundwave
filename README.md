@@ -24,13 +24,13 @@ It helps address the following issues:
 
 # Getting Started
 
-####1. Clone the repository
+#### 1. Clone the repository
 
 ```
 git clone https://github.com/pinterest/soundwave.git
 ```
 
-####2. Setup AWS Credentials
+#### 2. Setup AWS Credentials
 
 
 Soundwave uses [Terraform](https://www.terraform.io/) to provision the required infrastructure for running the service.
@@ -46,7 +46,7 @@ provider "aws" {
   region     = "<<Your AWS Region>>"
 } 
 ```
-####3. Run Terraform
+#### 3. Run Terraform
 
 
 ```
@@ -54,7 +54,7 @@ $ cd soundwave/terraform
 $ terraform apply
 ```
 
-####4. Update Properties
+#### 4. Update Properties
 
 
 Use the AWS region and your account number in the fields shown below
@@ -68,14 +68,14 @@ aws_region=us-east-1
 update_queue=https://sqs.us-east-1.amazonaws.com/<accountnumber>/soundwave-events
 ```
 
-####5. Build the project
+#### 5. Build the project
 
 
 ```
 mvn clean package
 ```
 
-####6. Update docker-compose
+#### 6. Update docker-compose
 
 
 Update the docker-compose.yml file to use your AWS Access and Secret keys
@@ -93,14 +93,14 @@ services:
       - AWS_SECRET_ACCESS_KEY=<<access_key>>
 ```
 
-####7. Run docker-compose
+#### 7. Run docker-compose
 
 
 ```
 docker-compose up
 ```
 
-####8. Create Elastic search indexes
+#### 8. Create Elastic search indexes
 
 
 ```
@@ -109,15 +109,15 @@ $ ./provision_index.sh http://localhost:9200/soundwave_prod
 $ ./provision_index.sh http://localhost:9200/soundwave_ss
 ```
 
-####9. Launch an EC2 instance through the AWS console or aws-cli command line
+#### 9. Launch an EC2 instance through the AWS console or aws-cli command line
 
-####10. See the results
+#### 10. See the results
 
 Results can be seen on one of the following:
 
-#####UI [http://localhost:80](http://localhost:80)
-#####API [http://localhost:8080/v2/instance/<instance_id>](http://localhost:8080/v2/instance/<instance_id>) 
-#####Elasticsearch [http://localhost:9200/soundwave_prod/_search](http://localhost:9200/soundwave_prod/_search)
+##### UI [http://localhost:80](http://localhost:80)
+##### API [http://localhost:8080/v2/instance/<instance_id>](http://localhost:8080/v2/instance/<instance_id>) 
+##### Elasticsearch [http://localhost:9200/soundwave_prod/_search](http://localhost:9200/soundwave_prod/_search)
 
 ```
 {
