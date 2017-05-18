@@ -1,6 +1,6 @@
 # Soundwave
 
-![Soundwave UI](soundwave/demo.png)
+![Soundwave UI](./demo.png)
 
 # What is soundwave
 Soundwave is a searchable EC2 inventory store. It tracks all the current and historic EC2 instances with their metadata.
