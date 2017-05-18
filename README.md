@@ -38,8 +38,8 @@ Soundwave uses [Terraform](https://www.terraform.io/) to provision the required 
 [Terraform](https://www.terraform.io/) requires AWS credentials (Access and Secret Key) of a privileged user. 
 ```
 $ vi soundwave/terraform/soundwaveaws.tf
-
 ----------------------------------------
+
 provider "aws" {
   access_key = "<<Your Access Key>>"
   secret_key = "<<Your Secret Key>>"
@@ -82,6 +82,7 @@ Update the docker-compose.yml file to use your AWS Access and Secret keys
 ```
 $ vi soundwave/docker-compose.yml
 ---------------------------------
+
 version: '2'
 services:
   soundwave-worker:
