@@ -21,6 +21,7 @@ It helps address the following issues:
 1. AWS EC2 API has rate limit, which make it unsuitable to directly query for machine information. 
 2. AWS does not persist metadata and instance information for terminated instances.  
 3. In AWS, EC2 schema can only be extended in a limited way with the use of tags.
+4. The EC2 API has very limited support for querying beyond simple filtering
 
 # Getting Started
 
