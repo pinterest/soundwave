@@ -18,10 +18,13 @@ The data is used for service management, visibility, and finance purposes.
 
 Soundwave is useful for companies which operate EC2 at scale and require to track usage and instance meta data.
 It helps address the following issues:
-1. AWS EC2 API has rate limit, which make it unsuitable to directly query for machine information. 
-2. AWS does not persist metadata and instance information for terminated instances.  
+1. AWS EC2 API has rate limit, which make it unsuitable to directly query for machine information from automation systems.
+2. AWS does not persist metadata and instance information for terminated instances.
 3. In AWS, EC2 schema can only be extended in a limited way with the use of tags.
-4. The EC2 API has very limited support for querying beyond simple filtering
+4. The EC2 API has very limited support for querying beyond simple filtering.
+5. It is more performant comparing to EC2 API. In our case, getting all running instances info takes 5 seconds in SoundWave but more than one minute from EC2 API.
+6. It creates a cloud agnostic abstract layer for configuration management. 
+
 
 # Getting Started
 
