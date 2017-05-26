@@ -17,13 +17,15 @@ The data is used for service management, visibility, and finance purposes.
 # Why use soundwave
 
 Soundwave is useful for companies which operate EC2 at scale and require to track usage and instance meta data.
-It helps address the following issues:
-1. AWS EC2 API has rate limit, which make it unsuitable to directly query for machine information from automation systems.
-2. AWS does not persist metadata and instance information for terminated instances.
-3. In AWS, EC2 schema can only be extended in a limited way with the use of tags.
-4. The EC2 API has very limited support for querying beyond simple filtering.
-5. It is more performant comparing to EC2 API. In our case, getting all running instances info takes 5 seconds in SoundWave but more than one minute from EC2 API.
-6. It creates a cloud agnostic abstract layer for configuration management. 
+While the AWS console and EC2 API can already be used to access the metadata of EC2 instances, there are some limitations that prompted us to build an internal data store. 
+1. AWS EC2 API has a rate limit which makes it unsuitable for direct querying of machine information from automation systems.
+2. AWS doesn’t persist metadata and instance information for terminated instances. This makes it difficult to track usage history and diagnostic issues of these terminated instances.
+3. In AWS, EC2 schema can only be extended in a limited way with the use of tags, so (insert why this is a problem)
+4. EC2 API has very limited support for querying beyond simple filtering.
+
+In addition, We built Soundwave to bring to life the following benefits:
+1. A dedicated tracking of EC2 instances in our elasticsearch store helps us achieve a better query performance than EC2 API. This means getting information about all running instances takes roughly 5 seconds in Soundwave, but more than a minute from EC2 API.
+2. It creates a cloud agnostic abstraction layer for configuration management that makes it easier to support hybrid cloud scenarios
 
 
 # Getting Started
