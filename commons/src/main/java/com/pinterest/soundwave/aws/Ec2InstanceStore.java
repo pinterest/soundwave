@@ -21,6 +21,7 @@ import com.pinterest.aws.AwsClientFactory;
 import com.pinterest.config.Configuration;
 
 import com.amazonaws.regions.Region;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.ec2.AmazonEC2Client;
 import com.amazonaws.services.ec2.model.AvailabilityZone;
 import com.amazonaws.services.ec2.model.CreateTagsRequest;
@@ -74,7 +75,10 @@ public final class Ec2InstanceStore implements CloudInstanceStore {
       awsRateLimiter =
       RateLimiter.create(Configuration.getProperties().getInt("aws_call_ratelimit", 1));
 
-  private AmazonEC2Client defaultClient = AwsClientFactory.createEC2Client();
+  private AmazonEC2Client defaultClient = AwsClientFactory.createEC2Client(
+      Region.getRegion(
+          Regions.fromName(Configuration.getProperties().getString("aws_region", "us-east-1")))
+  );
   private ConcurrentHashMap<String, AmazonEC2Client> regionClientsCache = new ConcurrentHashMap<>();
 
   public static Map<String, String> parseEc2UserData(String base64Input) {
