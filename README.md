@@ -11,7 +11,7 @@ It has three parts:
 * A UI dashboard for end users to perform ad hoc search.
 
 At Pinterest, Soundwave is the foundation of our Configuration Management Database which serves as the source of truth for our EC2 instance information.
-The data is used for service management, visibility, and finance purposes.
+The data is used for service management, visibility, and finance purposes. This engineering blog (https://medium.com/@Pinterest_Engineering/soundwave-an-open-source-configuration-management-database-df75b31b8f5a) contains the detail informations
 
 
 # Why use soundwave
