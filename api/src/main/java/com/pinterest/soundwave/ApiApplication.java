@@ -16,22 +16,23 @@
 
 package com.pinterest.soundwave;
 
+import com.pinterest.soundwave.elasticsearch.EsInstanceCounterStore;
+import com.pinterest.soundwave.elasticsearch.InstanceCounterStore;
 import com.pinterest.soundwave.health.EsHealthChecker;
+import com.pinterest.soundwave.pinterest.EsInstanceStore;
+import com.pinterest.soundwave.pinterest.EsServiceMappingStore;
+import com.pinterest.soundwave.pinterest.ServiceMappingStore;
 import com.pinterest.soundwave.resources.DailySnapshot;
 import com.pinterest.soundwave.resources.Health;
 import com.pinterest.soundwave.resources.Instance;
 import com.pinterest.soundwave.resources.InstanceCounter;
 import com.pinterest.soundwave.resources.Query;
 
-import com.pinterest.soundwave.elasticsearch.EsInstanceCounterStore;
-import com.pinterest.soundwave.elasticsearch.InstanceCounterStore;
-import com.pinterest.soundwave.pinterest.EsServiceMappingStore;
-import com.pinterest.soundwave.pinterest.EsInstanceStore;
-import com.pinterest.soundwave.pinterest.ServiceMappingStore;
-
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.federecio.dropwizard.swagger.SwaggerBundle;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.glassfish.jersey.filter.LoggingFilter;
 
 
@@ -49,6 +50,15 @@ public class ApiApplication extends Application<ApiConfiguration> {
   @Override
   public void initialize(final Bootstrap<ApiConfiguration> bootstrap) {
     // TODO: application initialization
+    bootstrap.addBundle(new SwaggerBundle<ApiConfiguration>() {
+      @Override
+      protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(
+          ApiConfiguration configuration) {
+        SwaggerBundleConfiguration config = new SwaggerBundleConfiguration();
+        config.setResourcePackage("com.pinterest.soundwave");
+        return config;
+      }
+    });
   }
 
   @Override
@@ -66,7 +76,7 @@ public class ApiApplication extends Application<ApiConfiguration> {
 
     // Logging inbound request/response
     environment.jersey().register(
-            new LoggingFilter(java.util.logging.Logger.getLogger("InboundRequestResponse"), true));
+        new LoggingFilter(java.util.logging.Logger.getLogger("InboundRequestResponse"), true));
 
     // Add API endpoints here
     final Instance instance = new Instance(cmdbInstanceStore);
@@ -77,7 +87,6 @@ public class ApiApplication extends Application<ApiConfiguration> {
 
     final Query query = new Query(cmdbInstanceStore);
     environment.jersey().register(query);
-
 
     final InstanceCounter instanceCounter = new InstanceCounter(instanceCounterStore);
     environment.jersey().register(instanceCounter);

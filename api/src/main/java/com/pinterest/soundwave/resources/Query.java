@@ -17,15 +17,17 @@
 package com.pinterest.soundwave.resources;
 
 
+import com.pinterest.OperationStats;
 import com.pinterest.soundwave.api.EsAggregation;
 import com.pinterest.soundwave.api.EsQuery;
-import com.pinterest.soundwave.utils.Utils;
-import com.pinterest.OperationStats;
 import com.pinterest.soundwave.bean.EsQueryResult;
 import com.pinterest.soundwave.elasticsearch.CmdbInstanceStore;
+import com.pinterest.soundwave.utils.Utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -51,15 +53,16 @@ import javax.ws.rs.core.Response;
 
 @Path("/v2/")
 @Produces(MediaType.APPLICATION_JSON)
+@Api()
 public class Query {
 
   private static final Logger logger = LoggerFactory.getLogger(Query.class);
-  private CmdbInstanceStore cmdbInstanceStore;
-  private static ObjectMapper mapper = new ObjectMapper();
   private static final List<String> dateFieldNames = new ArrayList<>(Arrays.asList(
       "terminated_time", "launch_time",
       "launchTime", "aws_launch_time",
       "created_time", "updated_time"));
+  private static ObjectMapper mapper = new ObjectMapper();
+  private CmdbInstanceStore cmdbInstanceStore;
 
   public Query(CmdbInstanceStore cmdbInstanceStore) {
 
@@ -69,6 +72,10 @@ public class Query {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Path("/query")
+  @ApiOperation(
+      value = "Send a general query",
+      response = Map.class,
+      responseContainer = "List")
   public Response query(EsQuery esQuery) {
 
     OperationStats opStats = new OperationStats("cmdb_api", "query", new HashMap<>());
@@ -147,7 +154,7 @@ public class Query {
 
       String[] aggregationParams = StringUtils.split(query, ",");
 
-      if ( aggregationParams.length == 0 ) {
+      if (aggregationParams.length == 0) {
 
         logger.warn("Aggregation Request with no fields");
         tags.put("status", String.valueOf(Response.Status.BAD_REQUEST.getStatusCode()));
