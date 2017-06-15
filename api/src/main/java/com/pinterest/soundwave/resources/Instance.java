@@ -16,16 +16,18 @@
 
 package com.pinterest.soundwave.resources;
 
-import com.pinterest.soundwave.api.EsInstanceAdapter;
-import com.pinterest.soundwave.utils.ObjectAdapter;
-import com.pinterest.soundwave.utils.Utils;
 import com.pinterest.OperationStats;
+import com.pinterest.soundwave.api.EsInstanceAdapter;
 import com.pinterest.soundwave.aws.AwsStatus;
 import com.pinterest.soundwave.bean.EsAwsStatus;
 import com.pinterest.soundwave.bean.EsInstance;
 import com.pinterest.soundwave.elasticsearch.CmdbInstanceStore;
+import com.pinterest.soundwave.utils.ObjectAdapter;
+import com.pinterest.soundwave.utils.Utils;
 
 import com.amazonaws.services.ec2.model.InstanceStatus;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +46,7 @@ import javax.ws.rs.core.Response;
 
 @Path("/v2/")
 @Produces(MediaType.APPLICATION_JSON)
+@Api()
 public class Instance {
 
   private static final Logger logger = LoggerFactory.getLogger(Instance.class);
@@ -55,6 +58,8 @@ public class Instance {
 
   @GET
   @Path("/instance/{instanceId}")
+  @ApiOperation(value = "Get an Instance by Id",
+      response = EsInstanceAdapter.class)
   public Response getInstance(@PathParam("instanceId") @NotNull String instanceId) {
 
     OperationStats opStats = new OperationStats("cmdb_api","get_instance", new HashMap<>());
@@ -98,6 +103,8 @@ public class Instance {
 
   @GET
   @Path("/instances/status/{instanceId}")
+  @ApiOperation(value = "Get an Instance status by Id",
+      response = Map.class)
   public Response getInstancesStatus(@PathParam("instanceId") @NotNull String instanceId) {
 
     OperationStats opStats =

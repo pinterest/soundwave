@@ -16,8 +16,13 @@
 
 package com.pinterest.soundwave;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 
 public class ApiConfiguration extends Configuration {
+
   // TODO: implement service configuration
+  @JsonProperty("swagger")
+  public SwaggerBundleConfiguration swaggerBundleConfiguration;
 }
