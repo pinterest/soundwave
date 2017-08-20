@@ -18,7 +18,7 @@ Soundwave is useful for companies which operate EC2 at scale and require to trac
 While the AWS console and EC2 API can already be used to access the metadata of EC2 instances, there are some limitations that prompted us to build an internal data store. 
 1. AWS EC2 API has a rate limit which makes it unsuitable for direct querying of machine information from automation systems.
 2. AWS doesn’t persist metadata and instance information for terminated instances. This makes it difficult to track usage history and diagnostic issues of these terminated instances.
-3. In AWS, EC2 schema can only be extended in a limited way with the use of tags, so (insert why this is a problem)
+3. In AWS, EC2 schema can only be extended in a limited way with the use of tags.
 4. EC2 API has very limited support for querying beyond simple filtering.
 
 In addition, We built Soundwave to bring to life the following benefits:
