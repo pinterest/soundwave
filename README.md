@@ -276,6 +276,12 @@ Results can be seen on one of the following:
    }
 }
 ```
+# Some example queries in UI (follows ES syntax):
+
+id:i-123456789abce
+cloud.aws.instanceType:c3.4xlarge
+aws_launch_time:>now-1d OR terminated_time:>now-1d
+
 # License
 [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 
