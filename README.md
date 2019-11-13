@@ -1,3 +1,7 @@
+**Note:** This project is no longer actively maintained by Pinterest.
+
+---
+
 # Soundwave
 ![Demo](https://github.com/pinterest/soundwave/blob/master/soundwavedemo.png)
 # What is soundwave
